@@ -1,28 +1,64 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  title: {
+  storeName: {
+    type: String,
+    required: true,
+  },
+  location: {
+    type: String,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+  },
+  province: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  product: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  unit: {
     type: String,
     required: true,
   },
   image: {
     type: String,
-    require: true,
+    required: true,
   },
   cloudinaryId: {
     type: String,
-    require: true,
+    required: true,
   },
   caption: {
     type: String,
-    required: true,
+    required: false,
   },
-  likes: {
+  stars: {
     type: Number,
     required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  userName: {
+    type: mongoose.Schema.Types.String,
     ref: "User",
   },
   createdAt: {
