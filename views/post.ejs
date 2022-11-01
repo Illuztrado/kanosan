@@ -1,39 +1,83 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
-        </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
+    <p><%= `${post.product} for PhP${post.price} per ${post.quantity} ${post.unit} in ${post.storeName}, ${post.location}, ${post.city}, ${post.province} was found by` %> <span><strong><%= post.userName %></strong></span></p>
+
+    <div class="row mt-2 justify-content-between">
+      <div class="col-5 text-center">
+          <div class="">
+            <h2 class="display-4 fw-normal">Pricing</h2>
+            <div class="col">
+              <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                  <h4 class="my-0 fw-normal"><%= post.product %></h4>
+                </div>
+                <div class="card-body">
+                  <h1 class="card-title pricing-card-title">PhP<%= post.price %><small class="text-muted fw-light">/<%= `${post.quantity} ${post.unit}` %></small></h1>
+                  <ul class="list-unstyled mt-3 mb-4">
+                    <li><%= post.storeName %></li>
+                    <li><%= post.location %></li>
+                    <li><%= post.city %></li>
+                    <li><%= post.province %></li>
+                  </ul>
+                  <!-- <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button> -->
+                  <div class="row justify-content-between">
+                    <form
+                      class="col-1"
+                      action="/post/likePost/<%= post.id %>?_method=PUT"
+                      method="POST"
+                    >
+                      <button class="btn btn-primary fa fa-star" type="submit"></button>
+                    </form>
+                    <span class="col">( <%= post.stars %> )</>
+                      <% if(post.user == user.id){ %></span>
+                    <form
+                      action="/post/deletePost/<%= post.id %>?_method=DELETE"
+                      method="POST"
+                      class="col-3"
+                    >
+                      <button class="btn btn-primary fa fa-trash" type="submit"></button>
+                    </form>
+                    <%}%>
+                  </div>
+      
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
+      <div class="col-6">
+        <div class="row justify-content-center">
+          <h3 class="display-4 fw-normal">Store Photos</h3>
+          <img class="col-9 img-fluid" src="<%= post.image%>" />
+        </div>  
+      </div>  
     </div>
-    <div class="col-3 mt-5">
+    
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+      
+    </div>
+
+    <!-- <div class="col-3 mt-5">
       <p><%=post.caption%></p>
-    </div>
+    </div> -->
+
     <div class="mt-5">
       <h2>Comments</h2>
       <div class="col-3 mt-5">
         <ul class="row list-unstyled">
           <% for(let i=0; i<comments.length; i++) { %>
-            <li class="col-6 justify-content-between mt-5">
-              <%= comments[i].comment %>
+            <li class="justify-content-between mt-1">
+              <span><strong><%= `${comments[i].userName}: ` %></strong></span><%= comments[i].comment %>
+              <!-- <% if(comments[i].user == user.id){ %>
+                <form
+                  action="/post/deletePost/<%= post.id %>?_method=DELETE"
+                  method="POST"
+                  class="col-3"
+                >
+                  <button class="btn btn-primary fa fa-trash" type="submit"></button>
+                </form>
+                <%}%> -->
             </li>
           <% } %>
         </ul>
@@ -46,10 +90,10 @@
         <button type="submit" class="btn btn-primary">Add</button>
       </form>
     </div>
-    <div class="col-6 mt-5">
+    <!-- <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
+    </div> -->
   </div>
 </div>
 

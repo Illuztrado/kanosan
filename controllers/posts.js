@@ -13,8 +13,9 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      // const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const posts = await Post.find().sort({ category: "desc" }).lean();
+      res.render("feed.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -34,12 +35,23 @@ module.exports = {
       const result = await cloudinary.uploader.upload(req.file.path);
 
       await Post.create({
-        title: req.body.title,
+        storeName: req.body.storeName,
+        location: req.body.location,
+        city: req.body.city,
+        province: req.body.province,
+
+        category: req.body.category,
+        product: req.body.product,
+        price: req.body.price,
+        quantity: req.body.quantity,
+        unit: req.body.unit,
+
         image: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
-        likes: 0,
+        stars: 0,
         user: req.user.id,
+        userName: req.user.userName
       });
       console.log("Post has been added!");
       res.redirect("/profile");
@@ -52,10 +64,10 @@ module.exports = {
       await Post.findOneAndUpdate(
         { _id: req.params.id },
         {
-          $inc: { likes: 1 },
+          $inc: { stars: 1 },
         }
       );
-      console.log("Likes +1");
+      console.log("Stars +1");
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
