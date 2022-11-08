@@ -1,28 +1,76 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-      <div class="col-6">
+      <div class="">
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+              <!-- <a href="/feed" class="col-3 btn btn-primary">Return to Feed</a> -->
           </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
+          <h2>Post the price of a product/store. Earn points for every post.</h2>
+          <div class="col-7 mt-5">
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+
+              <h3>Product details</h3>
               <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title" required>
+                <label for="category" class="form-label">Category</label>
+                <select class="form-control" id="category" name="category" required>
+                  <option value="" selected disabled>Select Product Category</option>
+                  <option value="Crops">Crops</option>
+                  <option value="Vegetables">Vegetables</option>
+                  <option value="Fruits">Fruits</option>
+                  <option value="Meats">Meats</option>
+                </select>
               </div>
               <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption" required></textarea>
+                  <label for="product" class="form-label">Product</label>
+                  <input type="text" class="form-control" id="product" name="product" required placeholder="Enter Product (e.g. rice, whole chicken, pork liempo, etc.">
               </div>
               <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file" required>
+                <label for="price" class="form-label">Price per quantity (e.g. 100 if price of product is PhP100.00)</label>
+                <input type="number" class="form-control" id="price" name="price" step="0.01" placeholder="0" required>
+              </div>
+              <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" step="0.50" placeholder="0" required>
+              </div>
+              <div class="mb-3">
+                <label for="unit" class="form-label">Unit (e.g. kilogram if product is measured per kilogram)</label>
+                <select class="form-control" id="unit" name="unit" required>
+                  <option value="" selected disabled>Select Unit</option>
+                  <option value="kilogram">kilogram</option>
+                  <option value="piece">piece</option>
+                </select>
+              </div>
+
+              <h3>Store details</h3>
+              <div class="mb-3">
+                <label for="storeName" class="form-label">Store Name</label>
+                <input type="text" class="form-control" id="storeName" name="storeName" placeholder="Enter Store Name" required>
+              </div>
+              <div class="mb-3">
+                <label for="location" class="form-label">Store Location</label>
+                <input type="text" class="form-control" id="location" name="location" placeholder="Enter Store Location" required>
+              </div>
+              <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" name="city" placeholder="Enter City where the Store is located" required>
+              </div>
+              <div class="mb-3">
+                <label for="province" class="form-label">Province</label>
+                <input type="text" class="form-control" id="province" name="province" placeholder="Enter Province where the Store is located" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="comments" class="form-label">Comments</label>
+                <textarea class="form-control" id="comments" name="comments"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="imgUpload" class="form-label">Upload photos of the product/store</label>
+                <input type="file" class="form-control" id="imageUpload" name="file">
               </div>
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+
             </form>
           </div>
       </div>
@@ -36,9 +84,9 @@
           </li>
         <% } %>
         </ul>
-        <div class="row justify-content-center mt-5">
+        <!-- <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
+        </div>   -->
       </div>  
     </div>
   </div>
