@@ -1,94 +1,131 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <!-- <a href="/feed" class="col-3 btn btn-primary">Return to Feed</a> -->
-          </div>
-          <h2>Post the price of a product/store. Earn points for every post.</h2>
-          <div class="col-7 mt-5">
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+  <div class="container">
+    <div class="row mt-5">
+      <p>Welcome back, <strong><%= user.userName %></strong>!</p>
+      <!-- <div class="row">
+        <p><strong>Email</strong>: <%= user.email %>
+        </p><a href="/feed" class="col-3 btn btn-primary">Return to Feed</a>
+      </div> -->
+      <h2 class="mb-4 text-center">Post the price of a product/store. Earn points for every post.</h2>
 
-              <h3>Product details</h3>
-              <div class="mb-3">
+      <div class="row d-flex justify-content-center text-center">
+        <section id="form-container" class="col-lg-8 mt-5 p-4 rounded">
+          <form class="" action="/post/createPost" enctype="multipart/form-data" method="POST">
+
+            <!-- Product Details -->
+            <h3>Product details</h3>
+            <div class="d-flex row mb-3">
+              <!-- Category -->
+              <div class="col-4">
                 <label for="category" class="form-label">Category</label>
-                <select class="form-control" id="category" name="category" required>
+                <select class="form-select" id="category" name="category">
                   <option value="" selected disabled>Select Product Category</option>
-                  <option value="Crops">Crops</option>
-                  <option value="Vegetables">Vegetables</option>
-                  <option value="Fruits">Fruits</option>
-                  <option value="Meats">Meats</option>
+                  <option value="riceAndCrops#0">Rice & Crops</option>
+                  <option value="fish#1">Fish</option>
+                  <option value="chicken#2">Chicken</option>
+                  <option value="pork#3">Pork</option>
+                  <option value="beef#4">Beef</option>
+                  <option value="vegetables#5">Vegetables</option>
+                  <option value="fruits#6">Fruits</option>
                 </select>
+                
               </div>
-              <div class="mb-3">
-                  <label for="product" class="form-label">Product</label>
-                  <input type="text" class="form-control" id="product" name="product" required placeholder="Enter Product (e.g. rice, whole chicken, pork liempo, etc.">
+              <!-- Product -->
+              <div class="col-4">
+                <label for="product" class="form-label">Product</label>
+                <input type="text" class="form-control" id="product" name="product" required
+                  placeholder="Enter Product (e.g. rice, whole chicken, pork liempo, etc.">
               </div>
-              <div class="mb-3">
-                <label for="price" class="form-label">Price per quantity (e.g. 100 if price of product is PhP100.00)</label>
-                <input type="number" class="form-control" id="price" name="price" step="0.01" placeholder="0" required>
+              <!-- Brand -->
+              <div class="col-4">
+                <label for="brand" class="form-label">Brand</label>
+                <input type="text" class="form-control" id="brand" name="brand"
+                  placeholder="Enter Brand Name">
               </div>
-              <div class="mb-3">
+            </div>
+            <!-- Quantity -->
+            <div class="d-flex row mb-3 align-items-end">
+              <div class="col-4">
+                <label for="price" class="form-label">Price per quantity</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="price" name="price" step="0.01" placeholder="0.00">
+                  <span class="input-group-text" id="basic-addon1">PhP</span>
+                </div>
+              </div>
+              <div class="col-3">
                 <label for="quantity" class="form-label">Quantity</label>
-                <input type="number" class="form-control" id="quantity" name="quantity" step="0.50" placeholder="0" required>
+                <input type="number" class="form-control" id="quantity" name="quantity" step="0.25" placeholder="0.00">
               </div>
-              <div class="mb-3">
-                <label for="unit" class="form-label">Unit (e.g. kilogram if product is measured per kilogram)</label>
-                <select class="form-control" id="unit" name="unit" required>
+              <div class="col-3">
+                <label for="unit" class="form-label">Unit</label>
+                <select class="form-select" id="unit" name="unit">
                   <option value="" selected disabled>Select Unit</option>
-                  <option value="kilogram">kilogram</option>
-                  <option value="piece">piece</option>
+                  <option value="kilogram">kilogram(s)</option>
+                  <option value="kilogram">gram(s)</option>
+                  <option value="piece">piece(s)</option>
                 </select>
               </div>
+              <p class="mt-3">*Conversion to Decimals  in Kg: 1/4kg = 0.25kg, 1/2kg = 0.50kg, 3/4kg = 0.75kg</p>
+            </div>
 
-              <h3>Store details</h3>
-              <div class="mb-3">
-                <label for="storeName" class="form-label">Store Name</label>
-                <input type="text" class="form-control" id="storeName" name="storeName" placeholder="Enter Store Name" required>
-              </div>
-              <div class="mb-3">
-                <label for="location" class="form-label">Store Location</label>
-                <input type="text" class="form-control" id="location" name="location" placeholder="Enter Store Location" required>
-              </div>
-              <div class="mb-3">
+            <h3>Store details</h3>
+            <div class="mb-3">
+              <label for="storeName" class="form-label">Store Name</label>
+              <input type="text" class="form-control" id="storeName" name="storeName" placeholder="Enter Store Name">
+            </div>
+            <div class="mb-3">
+              <label for="location" class="form-label">Store Location</label>
+              <input type="text" class="form-control" id="location" name="location" placeholder="Enter Store Location">
+            </div>
+            <div class="row mb-3">
+              <div class="col-6">
                 <label for="city" class="form-label">City</label>
-                <input type="text" class="form-control" id="city" name="city" placeholder="Enter City where the Store is located" required>
+                <input type="text" class="form-control" id="city" name="city"
+                  placeholder="City where store is located">
               </div>
-              <div class="mb-3">
+              <div class="col-6">
                 <label for="province" class="form-label">Province</label>
-                <input type="text" class="form-control" id="province" name="province" placeholder="Enter Province where the Store is located" required>
+                <input type="text" class="form-control" id="province" name="province"
+                  placeholder="Province where store is located">
               </div>
+            </div>
 
-              <div class="mb-3">
-                <label for="comments" class="form-label">Comments</label>
-                <textarea class="form-control" id="comments" name="comments"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Upload photos of the product/store</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            <div class="mb-3">
+              <label for="comments" class="form-label">Comments (Optional)</label>
+              <textarea class="form-control" id="comments" name="comments"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="imgUpload" class="form-label">Upload photos of the product/store (valid file formats: .PNG, .JPG, .JPEG)</label>
+              <input type="file" class="form-control" id="imageUpload" name="files" accept=".png, .jpg, .jpeg">
+            </div>
 
-            </form>
-          </div>
+            <div class="text-center">
+              <button type="submit" class="col-8 btn btn-danger" value="Upload">Submit</button>
+            </div>
+
+          </form>
+        </section>
+
+        <!-- <section class="col-4 mt-5">
+          <h3>Your Posts</h3>
+          <ul class="row list-unstyled">
+            <% for(var i=0; i<posts.length; i++) {%>
+              <li class="col-6 justify-content-between mt-5">
+                <a href="/post/<%= posts[i]._id%>">
+                    <img class="img-fluid" src="<%= posts[i].image%>">
+                  </a>
+                <a href="/post/<%= posts[i]._id%>" class="link">
+                  <%= posts[i].product %>
+                </a>
+              </li>
+              <% } %>
+          </ul>
+          <div class="row justify-content-center mt-5">
+                <a class="btn btn-primary" href="/feed">Return to Feed</a>
+              </div>  
+        </section> -->
+
       </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <!-- <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>   -->
-      </div>  
     </div>
   </div>
-</div>
-<%- include('partials/footer') -%>
+  <%- include('partials/footer') -%>
