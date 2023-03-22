@@ -1,25 +1,13 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  storeName: {
-    type: String,
-    required: true,
-  },
-  location: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-    required: true,
-  },
-  province: {
-    type: String,
-    required: true,
-  },
   category: {
     type: String,
-    required: true,
+    required: false,
+  },
+  categoryId: {
+    type: Number,
+    required: false,
   },
   product: {
     type: String,
@@ -27,23 +15,39 @@ const PostSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    required: true,
+    required: false,
   },
   quantity: {
     type: Number,
-    required: true,
+    required: false,
   },
   unit: {
     type: String,
-    required: true,
+    required: false,
+  },
+  storeName: {
+    type: String,
+    required: false,
+  },
+  location: {
+    type: String,
+    required: false,
+  },
+  city: {
+    type: String,
+    required: false,
+  },
+  province: {
+    type: String,
+    required: false,
   },
   image: {
     type: String,
-    required: true,
+    required: false,
   },
   cloudinaryId: {
     type: String,
-    required: true,
+    required: false,
   },
   caption: {
     type: String,

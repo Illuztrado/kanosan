@@ -9,6 +9,7 @@ const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
+const feedRoutes = require("./routes/feed");
 const postRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
 
@@ -56,10 +57,11 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
+app.use("/feed", feedRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
-  console.log("Server is running, you better catch it!");
+  console.log(`Server is running on port ${process.env.PORT}, you better catch it!`);
 });

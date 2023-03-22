@@ -1,5 +1,4 @@
 <%- include('partials/header') -%>
-
 <!-- <div class="container">
   <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
@@ -21,89 +20,162 @@
   </header>
 </div> -->
 
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <p><%= `We found ${posts.length} result(s).` %></p>
-      <!-- <% for(var i=0; i<posts.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5">
-          <a href="/post/<%= posts[i]._id%>">
-            <img class="img-fluid" src="<%= posts[i].image%>">
-          </a>
-        </li>
-      <% } %> -->
-      <div class="table-responsive">
-        <table class="table align-middle">
-          <thead>
-              <tr>
-                  <th scope="col">
-                    Product
-                  </th>
-                  <th scope="col">
-                    Category
-                  </th>
-                  <th scope="col">
-                    Price
-                  </th>
-                  <th scope="col">
-                    Quantity
-                  </th>
-                  <th scope="col">
-                    Store Name
-                  </th>
-                  <th scope="col">
-                    Store Location
-                  </th>
-                  <!-- <td colspan="2">
-                      August 24th
-                  </td> -->
-              </tr>
-          </thead>
-          <tbody>
-            <% for(let i=0; i<posts.length; i++) { %>
-              <tr>
-                <a href="/post/<%= posts[i]._id%>">
-                  <th scope="row">
-                    <a href="/post/<%= posts[i]._id%>" class="styl">
-                      <%= posts[i].product %>
-                      <!-- <time datetime="08:30:00">8:30 AM</time> -->
-                    </a>
-                  </th>
-                  <td scope="col">
-                    <%= posts[i].category %>
-                  </td>
-                  <td class="schedule-offset">
-                    <%= posts[i].price %>
-                  </td>
-                  <td class="schedule-offset">
-                    <%= `${posts[i].quantity} ${posts[i].unit}` %>
-                  </td>
-                  <td class="schedule-offset">
-                    <%= posts[i].storeName %>
-                  </td>
-                  <td class="schedule-offset">
-                    <%= `${posts[i].location}, ${posts[i].city}, ${posts[i].province}` %>
-                  </td>
+<div class="container-fluid border-top pt-4">
+  <p>Welcome back, <strong><%= user.userName %></strong>!</p>
+  <div class="row">
+    <div class="col col-2">
+      <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid flex-column">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-column">
+              <li class="nav-item" aria-current="page">
+                Category
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/feed">All Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/feed/category/<%= 0 %>">Rice & Crops</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed/category/1">Fish</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed/category/2">Chicken</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed/category/3">Pork</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed/category/4">Beef</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed/category/5">Vegetables</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed/category/6">Fruits</a>
+              </li>
+              <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
                 </a>
-              </tr>
-            <% } %>
-          </tbody>
-        </table>
-      </div>
-      <!-- <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul> -->
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
-    <div class="">
-      <div class="row justify-content-center mt-5">
-        <h5>Help other shoppers save money by posting prices of products from stores where you've shopped recently. Earn points for every post.</h5>
-        <a class="btn btn-primary" href="/profile">Add a Product/Store</a>
-      </div>
+    <div class="col">
+      <main class="main-feed">
+        <div class="container">
+          <div class="row justify-content-center">
+            <p class="col-md-5 mt-5">Help other shoppers save money by posting prices of products from stores where you've shopped recently. Earn points for every post.</p>
+            <div class="col-md-6 text-center mt-5">
+              <a class="btn btn-success fs-5" href="/profile">Click here to add a Product/Store</a>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Product feed data -->
+        <section class="container">
+          <div class="row justify-content-center mt-5">
+            <p><%= `Check out (${posts.length}) new products recently shared by the KanoSan community.` %></p>
+            <!-- <% for(var i=0; i<posts.length; i++) {%>
+              <li class="col-6 justify-content-between mt-5">
+                <a href="/post/<%= posts[i]._id%>">
+                  <img class="img-fluid" src="<%= posts[i].image%>">
+                </a>
+              </li>
+            <% } %> -->
+            <div class="table-responsive">
+              <table class="table align-middle table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                          Product
+                        </th>
+                        <th scope="col">
+                          Category
+                        </th>
+                        <th scope="col">
+                          Price
+                        </th>
+                        <th scope="col">
+                          Quantity
+                        </th>
+                        <th scope="col">
+                          Store Name
+                        </th>
+                        <th scope="col">
+                          Store Location
+                        </th>
+                        <!-- <td colspan="2">
+                            August 24th
+                        </td> -->
+                    </tr>
+                </thead>
+                <tbody>
+                  <% for(let i=0; i<posts.length; i++) { %>
+                    <tr>
+                      <th scope="row">
+                        <a href="/post/<%= posts[i]._id%>" class="">
+                          <%= posts[i].product %>
+                          <!-- <time datetime="08:30:00">8:30 AM</time> -->
+                        </a>
+                      </th>
+                      <td scope="col">
+                        <a href="/post/<%= posts[i]._id%>" class=""><%= posts[i].category %></a>
+                      </td>
+                      <td class="schedule-offset">
+                        <a href="/post/<%= posts[i]._id%>" class="">
+                          <%= posts[i].price %>
+                        </a>
+                      </td>
+                      <td class="schedule-offset">
+                        <a href="/post/<%= posts[i]._id%>" class="">
+                          <%= `${posts[i].quantity} ${posts[i].unit}` %>
+                        </a>
+                      </td>
+                      <td class="schedule-offset">
+                        <a href="/post/<%= posts[i]._id%>" class="">
+                          <%= posts[i].storeName %>
+                        </a>
+                      </td>
+                      <td class="schedule-offset">
+                        <a href="/post/<%= posts[i]._id%>" class="">
+                          <%= `${posts[i].location}, ${posts[i].city}, ${posts[i].province}` %>
+                        </a>
+                      </td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+            <!-- <ul class="row list-unstyled">
+              <% for(var i=0; i<posts.length; i++) {%>
+                <li class="col-6 justify-content-between mt-5">
+                  <a href="/post/<%= posts[i]._id%>">
+                    <img class="img-fluid" src="<%= posts[i].image%>">
+                  </a>
+                </li>
+              <% } %>
+              </ul> -->
+          </div>
+        </div>
+      </main>
     </div>
-  </div>  
+
+  </div>
+</div>
+
+
 <%- include('partials/footer') -%>
