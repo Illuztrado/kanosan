@@ -1,6 +1,6 @@
 
 # KanoSan
-TownBoard: A crowdsourcing platform enabling users to compare prices of basic grocery & household items sold in
+KanoSan: A crowdsourcing platform enabling users to compare prices of basic grocery & household items sold in
 traditional/brick-and-mortar stores.
 
 
